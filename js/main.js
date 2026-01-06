@@ -76,4 +76,28 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   });
+
+  // Header shadow on scroll: toggle .scrolled on the header
+  const headerEl = document.querySelector('.site-header');
+  function updateHeaderScroll() {
+    if (!headerEl) return;
+    if (window.scrollY > 12) headerEl.classList.add('scrolled'); else headerEl.classList.remove('scrolled');
+  }
+  // init and bind
+  updateHeaderScroll();
+  window.addEventListener('scroll', updateHeaderScroll, {passive:true});
 });
+  // Back-to-top button behavior
+  const backBtn = document.getElementById('backToTop');
+  function updateBackToTop() {
+    if (!backBtn) return;
+    if (window.scrollY > 300) backBtn.classList.add('visible'); else backBtn.classList.remove('visible');
+  }
+  if (backBtn) {
+    updateBackToTop();
+    window.addEventListener('scroll', updateBackToTop, {passive:true});
+    backBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({top:0,behavior:'smooth'});
+    });
+  }
